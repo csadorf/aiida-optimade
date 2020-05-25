@@ -1,7 +1,5 @@
 FROM python:3.7
 
-ENV AIIDA_PATH /app
-
 WORKDIR /app
 
 # Install specific optimade version
@@ -18,11 +16,11 @@ COPY setup.py setup.json README.md requirements*.txt ./
 COPY aiida_optimade ./aiida_optimade
 RUN pip install -e .
 
-# Copy AiiDA configuration
+# Copy Materials Cloud configuration
 COPY mcloud ./mcloud
-COPY mcloud/server_template.cfg ./server.cfg
-COPY .docker/run.sh ./
 
 EXPOSE 80
+
+COPY .docker/run.sh ./
 
 CMD ["/app/run.sh"]
