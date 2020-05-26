@@ -8,4 +8,10 @@ cp -n /profiles/$AIIDA_PROFILE.json $AIIDA_PATH/.aiida/config.json
 # ltalirz: Only works for Mac, not Linux
 # echo -e "`/sbin/ip route|awk '/default/ { print $3 }'`\tdocker.host.internal" | tee -a /etc/hosts > /dev/null
 
-uvicorn aiida_optimade.main:APP --host 0.0.0.0 --port 80 --log-level info
+if [ -n "${OPTIMADE_LOGGING_LEVEL}" ]; then
+    LOG_LEVEL="${OPTIMADE_LOGGING_LEVEL}"
+else
+    LOG_LEVEL=info
+fi
+
+uvicorn aiida_optimade.main:APP --host 0.0.0.0 --port 80 --log-level ${LOG_LEVEL}

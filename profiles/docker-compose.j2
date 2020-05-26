@@ -13,6 +13,7 @@ services:
       AIIDA_PATH: /app
       AIIDA_PROFILE: {{ aiida_profile }}
       OPTIMADE_CONFIG_FILE: "/app/mcloud/{{ aiida_profile }}.json"
+      OPTIMADE_LOGGING_LEVEL: {{ log_level }}
     volumes:
       - "{{ repo_folder }}:/app/.aiida/repository-quicksetup"
       - "{{ config_folder }}:/profiles"
